@@ -18,6 +18,8 @@ services:
     depends_on:
       - postgres
     volumes:
+      - ./public:/app/public  # Монтируем папку public
+      - ./src:/app/src        # Монтируем папку src
       - ./public:/app/public
       - ./src:/app/src
       - ./package.json:/app/package.json

@@ -3,22 +3,24 @@ const path = require('path');
 const app = express();
 const PORT = 3000;
 
-// Middleware для парсинга JSON
+// Middleware
 app.use(express.json());
+app.use(express.static(path.join(__dirname, '../public')));
 
-// ПОДКЛЮЧАЕМ СТАТИЧЕСКИЕ ФАЙЛЫ (это важно!)
-// В Docker контейнере путь: /app/public
-app.use(express.static(path.join(__dirname, 'public')));
-
-// ИЛИ если public на уровень выше:
-// app.use(express.static(path.join(__dirname, '../public')));
-
-// Главная страница
+// HTML страницы
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
-// Health check (JSON)
+app.get('/about', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/about.html'));
+});
+
+app.get('/contact', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/contact.html'));
+});
+
+// API
 app.get('/health', (req, res) => {
     res.json({
         status: 'OK',
@@ -27,7 +29,6 @@ app.get('/health', (req, res) => {
     });
 });
 
-// API маршрут (JSON)
 app.get('/api', (req, res) => {
     res.json({
         message: 'API магазина работает!',
@@ -37,33 +38,20 @@ app.get('/api', (req, res) => {
             'GET /about - О нас',
             'GET /contact - Контакты',
             'GET /health - Проверка здоровья',
-            'GET /api - Информация об API',
-            'GET /api/shop - Информация о магазине'
+            'GET /api - Информация об API'
         ]
     });
 });
 
-// API магазина (JSON)
-app.get('/api/shop', (req, res) => {
-    res.json({
-        name: 'Мой магазин',
-        message: 'Добро пожаловать в наш магазин!',
-        working: true,
-        features: ['Товары', 'Корзина', 'Заказы']
-    });
-});
-
-// Обработка 404 (ДОЛЖНА БЫТЬ ПОСЛЕДНЕЙ!)
+// 404 - красивая страница
 app.use((req, res) => {
-    res.status(404).json({
-        error: 'Маршрут не найден',
-        message: `Путь ${req.url} не существует`
-    });
+    res.status(404).sendFile(path.join(__dirname, '../public/404.html'));
 });
 
-// Запуск сервера
+// Запуск
 app.listen(PORT, () => {
     console.log(`🛒 Магазин запущен на порту ${PORT}`);
-    console.log(`🌐 Главная: http://localhost:${PORT}`);
-    console.log(`📊 Healthcheck: http://localhost:${PORT}/health`);
+    console.log(`🌐 http://localhost:${PORT}`);
+    console.log(`📖 http://localhost:${PORT}/about`);
+    console.log(`📞 http://localhost:${PORT}/contact`);
 });

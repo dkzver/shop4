@@ -3,27 +3,253 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Магазин</title>
+    <title>🛒 Магазин</title>
+    <!-- Локальный Bootstrap -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 0;
+            border-radius: 0 0 50px 50px;
+        }
+        .feature-card {
+            transition: transform 0.3s ease;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #667eea;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .footer {
+            background: #2d3436;
+            color: white;
+            padding: 40px 0;
+            margin-top: 60px;
+        }
+        .footer a {
+            color: #dfe6e9;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            color: #fd79a8;
+        }
+        .status-badge {
+            background: #00b894;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        .product-card {
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        .product-icon {
+            font-size: 3rem;
+        }
+    </style>
 </head>
 <body>
-<nav>
-    <a href="/">🏠 Главная</a> |
-    <a href="/about">📖 О нас</a> |
-    <a href="/contact">📞 Контакты</a> |
-    <a href="/health">📊 Health</a>
+
+<!-- Навигация -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <i class="bi bi-shop"></i> Магазин
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">
+                        <i class="bi bi-house"></i> Главная
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">
+                        <i class="bi bi-info-circle"></i> О нас
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">
+                        <i class="bi bi-envelope"></i> Контакты
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/health">
+                        <i class="bi bi-heart-pulse"></i> Health
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </nav>
-<hr>
 
-<h1>🛒 Привет, покупатель!у334</h1>
-<p>Добро пожаловать в наш магазин!</p>
-<hr>
-<p>Статус: <strong>✅ Работает</strong></p>
-<p>Время: <span id="currentTime"></span></p>
-<br>
-<a href="/api/shop">📦 API магазина</a>
+<!-- Hero секция -->
+<section class="hero-section text-center">
+    <div class="container">
+        <h1 class="display-1 fw-bold">
+            <i class="bi bi-bag-heart"></i> Привет, покупатель!
+        </h1>
+        <p class="lead fs-3 mt-3">Добро пожаловать в наш магазин</p>
+        <span class="status-badge mt-3 d-inline-block">
+                <i class="bi bi-check-circle"></i> Магазин работает
+            </span>
+        <p class="mt-3">
+            <span id="currentTime" class="fs-5"></span>
+        </p>
+    </div>
+</section>
 
+<!-- Карточки преимуществ -->
+<div class="container mt-5">
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card feature-card text-center p-4 h-100">
+                <div class="card-body">
+                    <div class="feature-icon mb-3">
+                        <i class="bi bi-truck"></i>
+                    </div>
+                    <h5 class="card-title">Быстрая доставка</h5>
+                    <p class="card-text text-muted">Доставляем заказы за 1-2 дня по всей стране</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card feature-card text-center p-4 h-100">
+                <div class="card-body">
+                    <div class="feature-icon mb-3">
+                        <i class="bi bi-shield-check"></i>
+                    </div>
+                    <h5 class="card-title">Гарантия качества</h5>
+                    <p class="card-text text-muted">Все товары проходят проверку качества</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card feature-card text-center p-4 h-100">
+                <div class="card-body">
+                    <div class="feature-icon mb-3">
+                        <i class="bi bi-headset"></i>
+                    </div>
+                    <h5 class="card-title">Поддержка 24/7</h5>
+                    <p class="card-text text-muted">Наша команда всегда готова помочь вам</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Товары -->
+<div class="container mt-5">
+    <h2 class="text-center mb-4">
+        <i class="bi bi-gift"></i> Популярные товары
+    </h2>
+    <div class="row g-4">
+        <div class="col-md-3">
+            <div class="card product-card h-100 text-center p-3">
+                <div class="card-body">
+                    <div class="product-icon text-primary">
+                        <i class="bi bi-laptop"></i>
+                    </div>
+                    <h5 class="card-title mt-2">Ноутбук</h5>
+                    <p class="card-text text-muted small">Мощный ноутбук для работы</p>
+                    <span class="badge bg-primary">₽ 49 999</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card product-card h-100 text-center p-3">
+                <div class="card-body">
+                    <div class="product-icon text-success">
+                        <i class="bi bi-phone"></i>
+                    </div>
+                    <h5 class="card-title mt-2">Смартфон</h5>
+                    <p class="card-text text-muted small">Современный смартфон</p>
+                    <span class="badge bg-success">₽ 29 999</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card product-card h-100 text-center p-3">
+                <div class="card-body">
+                    <div class="product-icon text-warning">
+                        <i class="bi bi-headphones"></i>
+                    </div>
+                    <h5 class="card-title mt-2">Наушники</h5>
+                    <p class="card-text text-muted small">Беспроводные наушники</p>
+                    <span class="badge bg-warning text-dark">₽ 5 999</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card product-card h-100 text-center p-3">
+                <div class="card-body">
+                    <div class="product-icon text-danger">
+                        <i class="bi bi-watch"></i>
+                    </div>
+                    <h5 class="card-title mt-2">Умные часы</h5>
+                    <p class="card-text text-muted small">Стильные умные часы</p>
+                    <span class="badge bg-danger">₽ 15 999</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Подвал -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h5><i class="bi bi-shop"></i> Магазин</h5>
+                <p>Лучшие товары по лучшим ценам</p>
+            </div>
+            <div class="col-md-4">
+                <h5>Ссылки</h5>
+                <ul class="list-unstyled">
+                    <li><a href="/"><i class="bi bi-chevron-right"></i> Главная</a></li>
+                    <li><a href="/about"><i class="bi bi-chevron-right"></i> О нас</a></li>
+                    <li><a href="/contact"><i class="bi bi-chevron-right"></i> Контакты</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h5>Контакты</h5>
+                <p><i class="bi bi-envelope"></i> shop@example.com</p>
+                <p><i class="bi bi-telephone"></i> +7 (999) 123-45-67</p>
+                <p><i class="bi bi-geo-alt"></i> г. Москва, ул. Примерная, д. 1</p>
+            </div>
+        </div>
+        <hr class="bg-light">
+        <p class="text-center mb-0">&copy; 2026 Магазин. Все права защищены.</p>
+    </div>
+</footer>
+
+<!-- Локальный Bootstrap JS -->
+<script src="/js/bootstrap.bundle.min.js"></script>
 <script>
-    document.getElementById('currentTime').textContent = new Date().toLocaleString();
+    document.getElementById('currentTime').textContent = '🕐 ' + new Date().toLocaleString();
+    setInterval(() => {
+        document.getElementById('currentTime').textContent = '🕐 ' + new Date().toLocaleString();
+    }, 1000);
 </script>
 </body>
 </html>
