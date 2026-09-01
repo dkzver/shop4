@@ -26,23 +26,6 @@
             font-size: 2.5rem;
             color: #667eea;
         }
-        .navbar-brand {
-            font-weight: bold;
-            font-size: 1.5rem;
-        }
-        .footer {
-            background: #2d3436;
-            color: white;
-            padding: 40px 0;
-            margin-top: 60px;
-        }
-        .footer a {
-            color: #dfe6e9;
-            text-decoration: none;
-        }
-        .footer a:hover {
-            color: #fd79a8;
-        }
         .status-badge {
             background: #00b894;
             color: white;
@@ -54,6 +37,7 @@
             transition: all 0.3s ease;
             border: none;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            position: relative;
         }
         .product-card:hover {
             transform: translateY(-5px);
@@ -61,6 +45,34 @@
         }
         .product-icon {
             font-size: 3rem;
+        }
+        .product-card .badge {
+            font-size: 0.8rem;
+            padding: 5px 10px;
+        }
+        .btn-outline-primary:hover {
+            background: #667eea;
+            color: white;
+        }
+        .section-title {
+            position: relative;
+            margin-bottom: 40px;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+        .product-card .card-body {
+            position: relative;
+            z-index: 1;
+        }
+        .badge {
+            z-index: 2;
         }
     </style>
 </head>
@@ -76,8 +88,8 @@
         </h1>
         <p class="lead fs-3 mt-3">Добро пожаловать в наш магазин</p>
         <span class="status-badge mt-3 d-inline-block">
-                <i class="bi bi-check-circle"></i> Магазин работает
-            </span>
+            <i class="bi bi-check-circle"></i> Магазин работает
+        </span>
         <p class="mt-3">
             <span id="currentTime" class="fs-5"></span>
         </p>
@@ -123,61 +135,12 @@
     </div>
 </div>
 
-<!-- Товары -->
+<!-- Блок товаров -->
 <div class="container mt-5">
-    <h2 class="text-center mb-4">
+    <h2 class="text-center section-title">
         <i class="bi bi-gift"></i> Популярные товары
     </h2>
-    <div class="row g-4">
-        <div class="col-md-3">
-            <div class="card product-card h-100 text-center p-3">
-                <div class="card-body">
-                    <div class="product-icon text-primary">
-                        <i class="bi bi-laptop"></i>
-                    </div>
-                    <h5 class="card-title mt-2">Ноутбук</h5>
-                    <p class="card-text text-muted small">Мощный ноутбук для работы</p>
-                    <span class="badge bg-primary">₽ 49 999</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card product-card h-100 text-center p-3">
-                <div class="card-body">
-                    <div class="product-icon text-success">
-                        <i class="bi bi-phone"></i>
-                    </div>
-                    <h5 class="card-title mt-2">Смартфон</h5>
-                    <p class="card-text text-muted small">Современный смартфон</p>
-                    <span class="badge bg-success">₽ 29 999</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card product-card h-100 text-center p-3">
-                <div class="card-body">
-                    <div class="product-icon text-warning">
-                        <i class="bi bi-headphones"></i>
-                    </div>
-                    <h5 class="card-title mt-2">Наушники</h5>
-                    <p class="card-text text-muted small">Беспроводные наушники</p>
-                    <span class="badge bg-warning text-dark">₽ 5 999</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card product-card h-100 text-center p-3">
-                <div class="card-body">
-                    <div class="product-icon text-danger">
-                        <i class="bi bi-watch"></i>
-                    </div>
-                    <h5 class="card-title mt-2">Умные часы</h5>
-                    <p class="card-text text-muted small">Стильные умные часы</p>
-                    <span class="badge bg-danger">₽ 15 999</span>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- PRODUCTS -->
 </div>
 
 <!-- FOOTER -->
@@ -188,6 +151,10 @@
     setInterval(() => {
         document.getElementById('currentTime').textContent = '🕐 ' + new Date().toLocaleString();
     }, 1000);
+
+    function addToCart(productId) {
+        alert('🛒 Товар добавлен в корзину (ID: ' + productId + ')');
+    }
 </script>
 </body>
 </html>

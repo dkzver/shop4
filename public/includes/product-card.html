@@ -1,0 +1,25 @@
+<div class="col-md-4 col-lg-4 mb-4">
+    <div class="card product-card h-100">
+        {{NEW_BADGE}}
+        {{SALE_BADGE}}
+        <div class="card-body text-center p-4">
+            <div class="product-icon display-1 text-primary mb-3">
+                <i class="bi {{IMAGE}}"></i>
+            </div>
+            <h5 class="card-title">{{NAME}}</h5>
+            <p class="card-text text-muted small">{{DESCRIPTION}}</p>
+            <div class="mb-2">
+                <span class="fs-5 fw-bold text-primary">₽ {{PRICE}}</span>
+                {{OLD_PRICE}}
+            </div>
+            <div class="mb-2">
+                <span class="small">{{STARS}}</span>
+                <span class="small text-muted ms-1">{{RATING}}</span>
+            </div>
+            <div class="mb-3">{{STOCK_BADGE}}</div>
+            <button class="btn btn-outline-primary btn-sm w-100" onclick="addToCart({{ID}})">
+                <i class="bi bi-cart-plus"></i> В корзину
+            </button>
+        </div>
+    </div>
+</div>

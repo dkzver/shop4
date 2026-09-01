@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль - Магазин</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+        .profile-section {
+            min-height: 70vh;
+            padding: 40px 0;
+        }
+        .profile-card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            margin: 0 auto 20px;
+        }
+        .stat-card {
+            border: none;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        .stat-card .number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+        .stat-card .label {
+            color: #636e72;
+            font-size: 0.9rem;
+        }
+        .order-item {
+            border-left: 3px solid #667eea;
+            padding-left: 15px;
+            margin-bottom: 15px;
+        }
+        .order-status {
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .order-status.pending { background: #ffeaa7; color: #fdcb6e; }
+        .order-status.processing { background: #74b9ff; color: #0984e3; }
+        .order-status.shipped { background: #81ecec; color: #00b894; }
+        .order-status.delivered { background: #55efc4; color: #00b894; }
+        .order-status.cancelled { background: #fab1a0; color: #d63031; }
+    </style>
+</head>
+<body>
+
+<!-- MENU -->
+
+<section class="profile-section">
+    <div class="container">
+        <div id="userInfo" class="row">
+            <div class="col-md-4">
+                <div class="profile-card text-center">
+                    <div class="profile-avatar">
+                        <i class="bi bi-person"></i>
+                    </div>
+                    <h3 id="userName">Иван Иванов</h3>
+                    <p class="text-muted" id="userEmail">ivan@example.com</p>
+                    <button class="btn btn-danger w-100" onclick="logout()">
+                        <i class="bi bi-box-arrow-right"></i> Выйти
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="profile-card">
+                    <h4><i class="bi bi-grid"></i> Статистика</h4>
+                    <div class="row g-3 mt-3">
+                        <div class="col-md-4">
+                            <div class="stat-card bg-light">
+                                <div class="number" id="orderCount">12</div>
+                                <div class="label">Заказов</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="stat-card bg-light">
+                                <div class="number" id="totalSpent">₽ 45 999</div>
+                                <div class="label">Потрачено</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="stat-card bg-light">
+                                <div class="number" id="favoritesCount">5</div>
+                                <div class="label">Избранное</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-card">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4><i class="bi bi-clock-history"></i> Последние заказы</h4>
+                        <a href="#" class="text-decoration-none">Все заказы →</a>
+                    </div>
+                    <div id="ordersList">
+                        <div class="order-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>Заказ #1</strong>
+                                    <div class="text-muted small">Ноутбук Acer Aspire</div>
+                                </div>
+                                <div>
+                                    <span class="order-status pending">Ожидает</span>
+                                    <span class="text-muted small ms-2">₽ 49 999</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="order-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>Заказ #2</strong>
+                                    <div class="text-muted small">Смартфон Xiaomi Note</div>
+                                </div>
+                                <div>
+                                    <span class="order-status delivered">Доставлен</span>
+                                    <span class="text-muted small ms-2">₽ 29 999</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="order-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>Заказ #3</strong>
+                                    <div class="text-muted small">Наушники Sony WH-1000</div>
+                                </div>
+                                <div>
+                                    <span class="order-status shipped">Отправлен</span>
+                                    <span class="text-muted small ms-2">₽ 5 999</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Проверка авторизации
+    document.addEventListener('DOMContentLoaded', function() {
+        const token = localStorage.getItem('token');
+        const userData = localStorage.getItem('user');
+
+        if (!token || !userData) {
+            window.location.href = '/login';
+            return;
+        }
+
+        try {
+            const user = JSON.parse(userData);
+            document.getElementById('userName').textContent = user.name || 'Пользователь';
+            document.getElementById('userEmail').textContent = user.email || 'email@example.com';
+        } catch (e) {
+            window.location.href = '/login';
+        }
+    });
+
+    // Функция выхода
+    function logout() {
+        if (confirm('Вы уверены, что хотите выйти?')) {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.href = '/login';
+        }
+    }
+</script>
+</body>
+</html>
