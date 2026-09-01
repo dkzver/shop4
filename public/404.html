@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 - Страница не найдена</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="/css/bootstrap-icons.min.css" rel="stylesheet">
     <style>
         .error-section {
             min-height: 100vh;
@@ -35,24 +35,10 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             line-height: 1;
-            margin-bottom: 20px;
         }
         .error-icon {
             font-size: 80px;
             color: #764ba2;
-            display: block;
-            margin-bottom: 20px;
-        }
-        .error-title {
-            font-size: 28px;
-            font-weight: 700;
-            color: #2d3436;
-            margin-bottom: 15px;
-        }
-        .error-text {
-            color: #636e72;
-            font-size: 16px;
-            margin-bottom: 30px;
         }
         .btn-home {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -61,60 +47,18 @@
             border-radius: 50px;
             color: white;
             font-weight: 600;
-            transition: all 0.3s ease;
         }
         .btn-home:hover {
             transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(118, 75, 162, 0.4);
             color: white;
-        }
-        .btn-home i {
-            margin-right: 10px;
-        }
-        .error-links {
-            margin-top: 30px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
         }
         .error-links a {
             color: #667eea;
             text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
+            margin: 0 10px;
         }
         .error-links a:hover {
             color: #764ba2;
-        }
-        .error-links a i {
-            margin-right: 5px;
-        }
-        .error-search {
-            margin-top: 30px;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .error-search input {
-            border-radius: 50px;
-            padding: 12px 20px;
-            border: 2px solid #dfe6e9;
-            transition: all 0.3s ease;
-        }
-        .error-search input:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
-        }
-        .error-search button {
-            border-radius: 50px;
-            padding: 12px 30px;
-            background: #667eea;
-            border: none;
-            color: white;
-            font-weight: 600;
-        }
-        .error-search button:hover {
-            background: #764ba2;
         }
     </style>
 </head>
@@ -123,70 +67,27 @@
     <div class="error-card">
         <i class="bi bi-exclamation-triangle-fill error-icon"></i>
         <div class="error-number">404</div>
-        <h1 class="error-title">
-            <i class="bi bi-emoji-frown"></i> Страница не найдена
-        </h1>
-        <p class="error-text">
-            Извините, страница которую вы ищете, не существует или была перемещена.
-        </p>
-
-        <!-- Поиск -->
-        <div class="error-search">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Поиск по сайту..." id="searchInput">
-                <button class="btn" onclick="searchSite()">
-                    <i class="bi bi-search"></i>
-                </button>
-            </div>
-        </div>
-
+        <h1><i class="bi bi-emoji-frown"></i> Страница не найдена</h1>
+        <p class="text-muted">Извините, страница не существует или была перемещена.</p>
         <a href="/" class="btn btn-home">
-            <i class="bi bi-house"></i> Вернуться на главную
+            <i class="bi bi-house"></i> На главную
         </a>
-
-        <div class="error-links">
-            <a href="/about">
-                <i class="bi bi-info-circle"></i> О нас
-            </a>
-            <a href="/contact">
-                <i class="bi bi-envelope"></i> Контакты
-            </a>
-            <a href="/health">
-                <i class="bi bi-heart-pulse"></i> Health
-            </a>
+        <div class="error-links mt-3">
+            <a href="/about"><i class="bi bi-info-circle"></i> О нас</a>
+            <a href="/contact"><i class="bi bi-envelope"></i> Контакты</a>
         </div>
-
         <div class="mt-4 text-muted small">
-            <i class="bi bi-clock"></i>
-            <span id="currentTime"></span>
+            <i class="bi bi-clock"></i> <span id="currentTime"></span>
         </div>
     </div>
 </div>
 
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script>
-    // Время
     document.getElementById('currentTime').textContent = new Date().toLocaleString();
     setInterval(() => {
         document.getElementById('currentTime').textContent = new Date().toLocaleString();
     }, 1000);
-
-    // Поиск
-    function searchSite() {
-        const query = document.getElementById('searchInput').value.trim();
-        if (query) {
-            alert('🔍 Поиск: "' + query + '"\n(Функция поиска в разработке)');
-        } else {
-            alert('📝 Введите текст для поиска');
-        }
-    }
-
-    // Поиск по Enter
-    document.getElementById('searchInput').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            searchSite();
-        }
-    });
 </script>
 </body>
 </html>

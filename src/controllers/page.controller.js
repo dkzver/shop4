@@ -2,65 +2,97 @@ const path = require('path');
 const fs = require('fs');
 
 // Определяем путь к папке public
-// В Docker: /app/public
-// Локально: C:/Project/shop/public
 const publicPath = path.join(__dirname, '../../public');
 
-// Функция для чтения HTML файла
-const renderHtml = (res, fileName) => {
-    const filePath = path.join(publicPath, fileName);
-
+// Функция для чтения файла
+const readFile = (filePath) => {
     try {
-        // Проверяем, существует ли файл
         if (fs.existsSync(filePath)) {
-            const html = fs.readFileSync(filePath, 'utf8');
-            res.send(html);
-        } else {
-            console.error(`Файл не найден: ${filePath}`);
-            res.status(404).send(`
-        <!DOCTYPE html>
-        <html>
-        <head><title>404</title></head>
-        <body>
-          <h1>❌ Страница не найдена</h1>
-          <p>Файл ${fileName} не найден</p>
-          <a href="/">Вернуться на главную</a>
-        </body>
-        </html>
-      `);
+            return fs.readFileSync(filePath, 'utf8');
         }
+        return '';
     } catch (error) {
-        console.error('Ошибка при чтении файла:', error);
-        res.status(500).send(`
-      <!DOCTYPE html>
-      <html>
-      <head><title>Ошибка</title></head>
-      <body>
-        <h1>❌ Ошибка сервера</h1>
-        <p>Не удалось загрузить страницу</p>
-        <a href="/">Вернуться на главную</a>
-      </body>
-      </html>
-    `);
+        console.error(`❌ Ошибка чтения ${filePath}:`, error);
+        return '';
     }
 };
 
-// Главная страница
+// Функция для рендеринга HTML с включением общих частей
+const renderPage = (res, fileName) => {
+    const filePath = path.join(publicPath, fileName);
+
+    try {
+        if (fs.existsSync(filePath)) {
+            let html = fs.readFileSync(filePath, 'utf8');
+
+            // Заменяем плейсхолдеры на общие части
+            const menu = readFile(path.join(publicPath, 'includes/menu.html'));
+            const footer = readFile(path.join(publicPath, 'includes/footer.html'));
+
+            // Вставляем меню после открывающего тега body
+            html = html.replace('<!-- MENU -->', menu);
+            // Вставляем футер перед закрывающим тегом body
+            html = html.replace('<!-- FOOTER -->', footer);
+
+            res.send(html);
+        } else {
+            console.error(`❌ Файл не найден: ${filePath}`);
+            res.status(404).send(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <title>404 - Страница не найдена</title>
+                    <link href="/css/bootstrap.min.css" rel="stylesheet">
+                    <link href="/css/bootstrap-icons.min.css" rel="stylesheet">
+                </head>
+                <body>
+                    <div class="container text-center mt-5">
+                        <h1 class="display-1 text-danger">404</h1>
+                        <h2>Файл ${fileName} не найден</h2>
+                        <a href="/" class="btn btn-primary mt-3">Вернуться на главную</a>
+                    </div>
+                </body>
+                </html>
+            `);
+        }
+    } catch (error) {
+        console.error('❌ Ошибка при чтении файла:', error);
+        res.status(500).send(`
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="UTF-8">
+                <title>Ошибка</title>
+                <link href="/css/bootstrap.min.css" rel="stylesheet">
+                <link href="/css/bootstrap-icons.min.css" rel="stylesheet">
+            </head>
+            <body>
+                <div class="container text-center mt-5">
+                    <h1 class="display-1 text-danger">500</h1>
+                    <h2>Ошибка сервера</h2>
+                    <p>${error.message}</p>
+                    <a href="/" class="btn btn-primary mt-3">Вернуться на главную</a>
+                </div>
+            </body>
+            </html>
+        `);
+    }
+};
+
+// Контроллеры для страниц
 exports.getHome = (req, res) => {
-    renderHtml(res, 'index.html');
+    renderPage(res, 'index.html');
 };
 
-// Страница "О нас"
 exports.getAbout = (req, res) => {
-    renderHtml(res, 'about.html');
+    renderPage(res, 'about.html');
 };
 
-// Страница "Контакты"
 exports.getContact = (req, res) => {
-    renderHtml(res, 'contact.html');
+    renderPage(res, 'contact.html');
 };
 
-// Страница 404
 exports.get404 = (req, res) => {
-    renderHtml(res, '404.html');
+    renderPage(res, '404.html');
 };
